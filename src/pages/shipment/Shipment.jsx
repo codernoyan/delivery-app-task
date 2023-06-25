@@ -1,61 +1,21 @@
 import { Tab } from '@headlessui/react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { RenderContext } from '../../contexts/RenderProvider';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Shipment() {
-  let [categories] = useState({
-    Recent: [
-      {
-        id: 1,
-        title: 'Does drinking coffee make you smarter?',
-        date: '5h ago',
-        commentCount: 5,
-        shareCount: 2,
-      },
-      {
-        id: 2,
-        title: "So you've bought coffee... now what?",
-        date: '2h ago',
-        commentCount: 3,
-        shareCount: 2,
-      },
-    ],
-    Popular: [
-      {
-        id: 1,
-        title: 'Is tech making coffee better or worse?',
-        date: 'Jan 7',
-        commentCount: 29,
-        shareCount: 16,
-      },
-      {
-        id: 2,
-        title: 'The most innovative things happening in coffee',
-        date: 'Mar 19',
-        commentCount: 24,
-        shareCount: 12,
-      },
-    ],
-    Trending: [
-      {
-        id: 1,
-        title: 'Ask Me Anything: 10 answers to your questions about coffee',
-        date: '2d ago',
-        commentCount: 9,
-        shareCount: 5,
-      },
-      {
-        id: 2,
-        title: "The worst advice we've ever heard about coffee",
-        date: '4d ago',
-        commentCount: 1,
-        shareCount: 2,
-      },
-    ],
-  })
+  const { productOrders } = useContext(RenderContext);
+  
+  const [categories] = useState({
+    "All Orders": productOrders,
+    "Regular Delivery": productOrders.filter((product) => product.deliveryType === 'Regular'),
+    "Express Delivery": productOrders.filter((product) => product.deliveryType === 'Express'),
+  });
+  
+  console.log("🚀 ~ file: Shipment.jsx:11 ~ Shipment ~ productOrders:", productOrders);
 
   return (
     <div className="w-full px-2 sm:px-0 mt-4 container mx-auto">
@@ -80,7 +40,7 @@ export default function Shipment() {
             ))}
           </Tab.List>
           <Tab.Panels className="mt-2">
-            {Object.values(categories).map((posts, idx) => (
+            {Object.values(categories).map((orders, idx) => (
               <Tab.Panel
                 key={idx}
                 className={classNames(
@@ -88,24 +48,22 @@ export default function Shipment() {
                   'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
                 )}
               >
-                <ul>
-                  {posts.map((post) => (
+                  {/* {orders.map((orders) => (
                     <li
-                      key={post.id}
+                      key={orders.id}
                       className="relative rounded-md p-3 hover:bg-gray-100"
                     >
                       <h3 className="text-sm font-medium leading-5">
-                        {post.title}
+                        {orders.productName}
                       </h3>
 
                       <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                        <li>{post.date}</li>
+                        <li>{orders.price}</li>
                         <li>&middot;</li>
-                        <li>{post.commentCount} comments</li>
+                        <li>{orders.deliveryType} comments</li>
                         <li>&middot;</li>
-                        <li>{post.shareCount} shares</li>
+                        <li>{orders.shareCount} shares</li>
                       </ul>
-
                       <a
                         href="#"
                         className={classNames(
@@ -114,8 +72,35 @@ export default function Shipment() {
                         )}
                       />
                     </li>
-                  ))}
-                </ul>
+                  ))} */}
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                    <thead className="ltr:text-left rtl:text-right">
+                      <tr>
+                        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          Product Name
+                        </th>
+                        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          Price
+                        </th>
+                        <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          Delivery Type
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {orders.map((order) => (
+                        <tr key={order.orderId}>
+                          <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                            {order.productName}
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">{order.price}</td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">{order.deliveryType}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </Tab.Panel>
             ))}
           </Tab.Panels>

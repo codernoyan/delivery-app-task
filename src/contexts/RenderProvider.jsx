@@ -5,15 +5,14 @@ export const RenderContext = createContext(null);
 
 export default function RenderProvider({ children }) {
   const [render, setRender] = useState("Home");
-  
-  // product data
-  const productOrders = [];
+  const [productOrders, setProductOrders] = useState([]);
 
   const renderInfo = {
     render,
     setRender,
     productOrders,
-  }
+    setProductOrders,
+  };
 
   return (
     <RenderContext.Provider value={renderInfo}>

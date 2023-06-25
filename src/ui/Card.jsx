@@ -21,5 +21,5 @@ export default function Card({ glass }) {
         <Modal productData={productData} />
       </div>
     </div>
-  )
+  );
 }

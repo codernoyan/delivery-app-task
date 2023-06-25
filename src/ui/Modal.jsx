@@ -6,15 +6,12 @@ import { RenderContext } from '../contexts/RenderProvider';
 export default function Modal({ productData }) {
   let [isOpen, setIsOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState("");
-  const { productOrders } = useContext(RenderContext);
+  const { setProductOrders } = useContext(RenderContext);
   
   function closeModal() {
     setIsOpen(false);
-    // console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ deliveryType:", deliveryType);
     Object.assign(productData, {deliveryType})
-    console.log("🚀 ~ file: Modal.jsx:5 ~ Modal ~ productData:", productData);
-    productOrders.push(productData);
-    console.log(productOrders);
+    setProductOrders((prev) => [...prev, productData])
   }
 
   function openModal() {
@@ -72,6 +69,7 @@ export default function Modal({ productData }) {
                       <option value="Express">Express</option>
                     </select>
                   </div>
+                  {/* main data */}
                   <div className="mt-4">
                     <button
                       type="button"
