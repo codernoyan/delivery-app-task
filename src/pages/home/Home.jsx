@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Card from "../../ui/Card";
+import Modal from "../../ui/Modal";
 
 const glassesData = [
   {
@@ -68,13 +70,20 @@ const glassesData = [
 ];
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
   return (
     <main className="container mx-auto px-2 md:px-0 mt-4">
       <div className="grid grid-cols-1 justify-items-center md:grid-cols-2 lg:grid-cols-4 gap-4">
         {
-          glassesData.map((glass) => <Card key={glass.id} glass={glass} />)
+          glassesData.map((glass) => <Card openModal={openModal} key={glass.id} glass={glass} />)
         }
       </div>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </main>
   )
 }
