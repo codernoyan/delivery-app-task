@@ -1,11 +1,20 @@
+/* eslint-disable react/prop-types */
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import { RenderContext } from '../contexts/RenderProvider';
 
-export default function Modal() {
+export default function Modal({ productData }) {
   let [isOpen, setIsOpen] = useState(false);
-
+  const [deliveryType, setDeliveryType] = useState("");
+  const { productOrders } = useContext(RenderContext);
+  
   function closeModal() {
     setIsOpen(false);
+    // console.log("🚀 ~ file: Modal.jsx:7 ~ Modal ~ deliveryType:", deliveryType);
+    Object.assign(productData, {deliveryType})
+    console.log("🚀 ~ file: Modal.jsx:5 ~ Modal ~ productData:", productData);
+    productOrders.push(productData);
+    console.log(productOrders);
   }
 
   function openModal() {
@@ -31,7 +40,7 @@ export default function Modal() {
           >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
-
+            {/* modal data */}
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
@@ -48,26 +57,33 @@ export default function Modal() {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    Select a delivery type
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
+                  {/* main data */}
+                  <div>
+                    <select
+                      name="HeadlineAct"
+                      id="HeadlineAct"
+                      onChange={(e) => setDeliveryType(e.target.value)}
+                      value={deliveryType}
+                      className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm">
+                      <option defaultValue>Please Select</option>
+                      <option value="Regular">Regular</option>
+                      <option value="Express">Express</option>
+                    </select>
                   </div>
-
                   <div className="mt-4">
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Place Order
                     </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
+              
             </div>
           </div>
         </Dialog>
