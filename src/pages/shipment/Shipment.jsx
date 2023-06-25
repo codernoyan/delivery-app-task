@@ -66,11 +66,11 @@ export default function Shipment() {
                     <tbody className="divide-y divide-gray-200">
                       {orders.map((order) => (
                         <tr key={order.orderId}>
-                          <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                          <td className="whitespace-nowrap px-4 text-center py-2 font-medium text-gray-900">
                             {order.productName}
                           </td>
-                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">{order.price}</td>
-                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">{order.deliveryType}</td>
+                          <td className="whitespace-nowrap px-4 text-center py-2 text-gray-700">{order.price}</td>
+                          <td className="whitespace-nowrap px-4 text-center py-2 text-gray-700">{order.deliveryType}</td>
                         </tr>
                       ))}
                     </tbody>
