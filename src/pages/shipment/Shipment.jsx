@@ -58,7 +58,7 @@ export default function Shipment() {
   })
 
   return (
-    <div className="w-full max-w-md px-2 py-16 sm:px-0 mt-8">
+    <div className="w-full px-2 sm:px-0 mt-4 container mx-auto">
       <div>
         <Tab.Group>
           <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">

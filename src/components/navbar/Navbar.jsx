@@ -18,10 +18,10 @@ export default function Navbar() {
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50 shadow-sm bg-slate-800">
-      <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className="shadow-sm bg-slate-800">
+      <nav className="flex items-center justify-between py-6 container mx-auto px-2 md:px-0" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a onClick={(e) => handleRender(e, "Home")} className="-m-1.5 p-1.5 cursor-pointer">
             <span className="sr-only">Your Company</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-white">
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
@@ -40,15 +40,15 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <button type="button" onClick={(e) => handleRender(e, item.name)} key={item.name} className="text-sm font-semibold leading-6 text-white">
+            <a type="button" onClick={(e) => handleRender(e, item.name)} key={item.name} className="text-sm font-semibold leading-6 text-white cursor-pointer">
               {item.name}
-            </button>
+            </a>
           ))}
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden bg-slate-800 text-white" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-50" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 text-white">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-800 px-2 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 text-white">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
@@ -72,7 +72,7 @@ export default function Navbar() {
                   <a
                     key={item.name}
                     onClick={(e) => handleRender(e, item.name)}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-600"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-600 cursor-pointer"
                   >
                     {item.name}
                   </a>
