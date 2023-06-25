@@ -48,31 +48,6 @@ export default function Shipment() {
                   'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
                 )}
               >
-                  {/* {orders.map((orders) => (
-                    <li
-                      key={orders.id}
-                      className="relative rounded-md p-3 hover:bg-gray-100"
-                    >
-                      <h3 className="text-sm font-medium leading-5">
-                        {orders.productName}
-                      </h3>
-
-                      <ul className="mt-1 flex space-x-1 text-xs font-normal leading-4 text-gray-500">
-                        <li>{orders.price}</li>
-                        <li>&middot;</li>
-                        <li>{orders.deliveryType} comments</li>
-                        <li>&middot;</li>
-                        <li>{orders.shareCount} shares</li>
-                      </ul>
-                      <a
-                        href="#"
-                        className={classNames(
-                          'absolute inset-0 rounded-md',
-                          'ring-blue-400 focus:z-10 focus:outline-none focus:ring-2'
-                        )}
-                      />
-                    </li>
-                  ))} */}
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                     <thead className="ltr:text-left rtl:text-right">
