@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { RenderContext } from '../../contexts/RenderProvider';
 
 const navigation = [
   { name: 'Home', href: '#' },
@@ -8,7 +9,14 @@ const navigation = [
 ];
 
 export default function Navbar() {
+  const { setRender } = useContext(RenderContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleRender = (e, itemName) => {
+    e.preventDefault();
+    setRender(itemName);
+  }
+
   return (
     <header className="absolute inset-x-0 top-0 z-50 shadow-sm bg-slate-50">
       <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -32,9 +40,9 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+            <button type="button" onClick={(e) => handleRender(e, item.name)} key={item.name} className="text-sm font-semibold leading-6 text-gray-900">
               {item.name}
-            </a>
+            </button>
           ))}
         </div>
       </nav>
